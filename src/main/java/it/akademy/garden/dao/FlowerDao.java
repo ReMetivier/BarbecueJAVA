@@ -12,5 +12,5 @@ public interface FlowerDao extends JpaRepository<Flower, Integer> {
     @Override
     List<Flower> findAll();
 
-    //Flower findById(int id);
+    Flower findById(int id);
 }
