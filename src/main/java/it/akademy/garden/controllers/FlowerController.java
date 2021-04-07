@@ -6,10 +6,7 @@ import it.akademy.garden.models.Flower;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,5 +34,21 @@ public class FlowerController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(flower, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Flower> createFlower(@RequestBody Flower flower){
+        flowerDao.save(flower);
+        return new ResponseEntity<>(flower, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteFlower(@PathVariable int id){
+        Flower flower = flowerDao.findById(id);
+        if(flower == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        flowerDao.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

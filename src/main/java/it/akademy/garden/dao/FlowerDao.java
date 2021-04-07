@@ -13,4 +13,8 @@ public interface FlowerDao extends JpaRepository<Flower, Integer> {
     List<Flower> findAll();
 
     Flower findById(int id);
+
+    Flower save(Flower flower);
+
+    void deleteById(int id);
 }
