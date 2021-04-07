@@ -60,8 +60,8 @@ public class FlowerController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
+        flower.setId(id);
         modifiedFlower = flowerDao.save(flower);
-
         return new ResponseEntity<>(modifiedFlower, HttpStatus.OK);
     }
 }
