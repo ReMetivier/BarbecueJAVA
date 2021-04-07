@@ -51,4 +51,17 @@ public class FlowerController {
         flowerDao.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Flower> putFlower(@PathVariable int id, @RequestBody Flower flower){
+        Flower modifiedFlower = flowerDao.findById(id);
+
+        if(modifiedFlower == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        modifiedFlower = flowerDao.save(flower);
+
+        return new ResponseEntity<>(modifiedFlower, HttpStatus.OK);
+    }
 }
